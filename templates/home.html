@@ -8,12 +8,22 @@
             {{ form.csrf }}
  
             <div class="input text">
-                {{ form.textform.label }} {{ form.textform }}
+                {{ form.textform(rows='8', cols='50') }}
             </div>
  
             <div class="input submit">
                 <input type="submit" value="Submit" />
             </div>
+
+            <p>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </p>
         </form>
     </body>
 </html>
