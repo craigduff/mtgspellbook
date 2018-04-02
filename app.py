@@ -4,6 +4,8 @@ import json
 from flask_wtf import FlaskForm
 from wtforms import TextAreaField, SubmitField
 from wtforms.validators import DataRequired
+import StringIO
+
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -16,7 +18,14 @@ class TextForm(FlaskForm):
 def builder():
 	form = TextForm()
 	if request.method == 'POST':
-		return request.form.to_dict(flat=False)['textform'][0]
+		cards = []
+		failed_to_find = []
+		input = StringIO.StringIO(request.form.to_dict(flat=False)['textform'][0])
+		for line in input:
+			# check if card is real
+			# if found, put in cards
+			# else put in failed_to_find
+		return input
 		redirect('home.html')
 	return render_template('home.html', title='Submission', form=form)
 
